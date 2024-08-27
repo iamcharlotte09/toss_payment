@@ -104,9 +104,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
                 //원래 결제 화면으로 돌아옴
               } else if (paymentResult.fail != null) {
-                print('ORDER ID: ${paymentResult.fail!.orderId}');
-                print('ERROR MESSAGE: ${paymentResult.fail!.errorMessage}');
-                print('ERROR CODE: ${paymentResult.fail!.errorCode}');
                 // 결제 실패 처리
                 //snackbar, pop
                 showDialog(
@@ -129,27 +126,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
               }
             },
             child: const Text('결제하기')),
-        ElevatedButton(
-            onPressed: () async {
-              final selectedPaymentMethod =
-                  await _paymentMethodWidgetControl?.getSelectedPaymentMethod();
-              print(
-                  '${selectedPaymentMethod?.method} ${selectedPaymentMethod?.easyPay?.provider ?? ''}');
-            },
-            child: const Text('선택한 결제수단 출력')),
-        ElevatedButton(
-            onPressed: () async {
-              final agreementStatus =
-                  await _agreementWidgetControl?.getAgreementStatus();
-              print('${agreementStatus?.agreedRequiredTerms}');
-            },
-            child: const Text('약관 동의 상태 출력')),
-        ElevatedButton(
-            onPressed: () async {
-              await _paymentMethodWidgetControl?.updateAmount(amount: 300);
-              print('결제 금액이 300원으로 변경되었습니다.');
-            },
-            child: const Text('결제 금액 변경'))
       ]))
     ])));
   }
