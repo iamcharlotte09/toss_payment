@@ -37,7 +37,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state != null) {
+        if (state.user != null) {
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => ProductsScreen()));
         }

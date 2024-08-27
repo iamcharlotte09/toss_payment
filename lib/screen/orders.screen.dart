@@ -1,9 +1,12 @@
+import 'package:commerce_app/bloc/auth.bloc.dart';
 import 'package:commerce_app/bloc/order.bloc.dart';
 import 'package:commerce_app/comp/basket_item_card.comp.dart';
 import 'package:commerce_app/const/colors.dart';
 import 'package:commerce_app/event/order.event.dart';
 import 'package:commerce_app/layout/default.layout.dart';
+import 'package:commerce_app/screen/auth.screen.dart';
 import 'package:commerce_app/screen/products.screen.dart';
+import 'package:commerce_app/state/auth.state.dart';
 import 'package:commerce_app/state/order.state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

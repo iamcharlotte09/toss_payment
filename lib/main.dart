@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         home: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            if (state != null) {
+            if (state.user != null) {
               return ProductsScreen();
             } else {
               return AuthScreen();

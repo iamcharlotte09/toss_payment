@@ -10,16 +10,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<Login>(_onLogin);
     on<Logout>(_onLogout);
     on<SignUp>(_onSignUp);
-    _getUser();
+    _monitorAuthState();
   }
 
-  void _getUser() {
-    final user = repository.getUser();
-    if (user != null) {
-      emit(AuthState(user: user));
-    }
-    emit(AuthState(user:null));
+  void _monitorAuthState() {
+    repository.authState?.listen((event) {
+      final session = event.session;
+      if (session != null) {
+        // 사용자 로그인 상태
+        emit(AuthState(user: session.user));
+      } else {
+        // 사용자 로그아웃 상태
+        emit(AuthState(user: null));
+      }
+    });
   }
+
 
   void _onLogin(Login event, Emitter<AuthState> emit) async {
     try {

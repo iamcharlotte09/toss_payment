@@ -20,9 +20,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   }
 
   String _getUserId(){
-    // Access the current userId from the AuthBloc's state
     final authState = authBloc.state;
-    final userId = authState.user?.id; // Assuming your User model has an 'id' field
+    final userId = authState.user?.id;
 
     if (userId != null) {
       return userId;

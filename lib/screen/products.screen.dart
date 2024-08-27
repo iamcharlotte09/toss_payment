@@ -33,9 +33,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state != null) {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => AuthScreen()));
+        if (state.user == null) {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => const AuthScreen(
+                    isLogin: true,
+                  )));
         }
       },
       child: BlocBuilder<BasketBloc, BasketState>(
@@ -43,8 +45,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
           final itemCount = state.basket.isEmpty
               ? null
               : state.basket
-              .fold(0, (sum, item) => sum + item!.quantity)
-              .toString();
+                  .fold(0, (sum, item) => sum + item!.quantity)
+                  .toString();
 
           return DefaultLayout(
             fab: FloatingActionButton(
@@ -58,16 +60,16 @@ class _ProductsScreenState extends State<ProductsScreen> {
               },
               child: itemCount != null
                   ? Badge(
-                label: Text(itemCount),
-                child: const Icon(
-                  Icons.shopping_basket,
-                  color: Colors.white,
-                ),
-              )
+                      label: Text(itemCount),
+                      child: const Icon(
+                        Icons.shopping_basket,
+                        color: Colors.white,
+                      ),
+                    )
                   : const Icon(
-                Icons.shopping_basket,
-                color: Colors.white,
-              ),
+                      Icons.shopping_basket,
+                      color: Colors.white,
+                    ),
             ),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
@@ -100,14 +102,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       if (state is LoadedProductState) {
                         return SliverGrid(
                           gridDelegate:
-                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                              const SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 200.0,
                             crossAxisSpacing: 16,
                             mainAxisSpacing: 16,
                             childAspectRatio: 3 / 4,
                           ),
                           delegate: SliverChildBuilderDelegate(
-                                (BuildContext context, int index) {
+                            (BuildContext context, int index) {
                               return ProductCard.fromProductModel(
                                   model: state.products[index]);
                             },

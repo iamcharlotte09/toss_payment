@@ -37,8 +37,6 @@ class PaymentSuccessDialog extends StatelessWidget {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
-
-
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => OrdersScreen()),
                   (route) => false,

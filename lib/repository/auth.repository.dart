@@ -5,9 +5,7 @@ class AuthRepository {
 
   AuthRepository({required this.supabase});
 
-  User? getUser(){
-    return supabase.auth.currentUser;
-  }
+  Stream<AuthState>? get authState => supabase.auth.onAuthStateChange;
 
   login({required String email, required String password}) async {
     return await supabase.auth.signInWithPassword(
