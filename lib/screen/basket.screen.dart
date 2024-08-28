@@ -1,5 +1,6 @@
 import 'package:commerce_app/bloc/basket.bloc.dart';
 import 'package:commerce_app/comp/basket_item_card.comp.dart';
+import 'package:commerce_app/comp/custom_button.comp.dart';
 import 'package:commerce_app/const/colors.dart';
 import 'package:commerce_app/layout/default.layout.dart';
 import 'package:commerce_app/model/basket.model.dart';
@@ -141,7 +142,7 @@ class _Bottom extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        ElevatedButton(
+        CustomButton(
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -151,21 +152,7 @@ class _Bottom extends StatelessWidget {
               ),
             );
           },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: primaryColor,
-            minimumSize: const Size(double.infinity, 56),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(28),
-            ),
-          ),
-          child: const Text(
-            '결제하기',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
+          text:'결제하기',
         ),
       ],
     );

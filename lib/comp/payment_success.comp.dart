@@ -1,4 +1,5 @@
 import 'package:commerce_app/bloc/order.bloc.dart';
+import 'package:commerce_app/comp/custom_button.comp.dart';
 import 'package:commerce_app/const/colors.dart';
 import 'package:commerce_app/event/order.event.dart';
 import 'package:commerce_app/model/basket.model.dart';
@@ -35,27 +36,14 @@ class PaymentSuccessDialog extends StatelessWidget {
             const SizedBox(height: 16),
             _Middle(),
             const SizedBox(height: 32),
-            ElevatedButton(
+            CustomButton(
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => OrdersScreen()),
                   (route) => false,
                 );
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor,
-                minimumSize: const Size(double.infinity, 48),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
-                ),
-              ),
-              child: const Text(
-                '내 주문 보러가기',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              text:  '내 주문 보러가기',
             ),
             SizedBox(height: 16),
           ],

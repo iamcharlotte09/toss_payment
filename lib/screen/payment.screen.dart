@@ -1,5 +1,6 @@
 import 'package:commerce_app/bloc/basket.bloc.dart';
 import 'package:commerce_app/bloc/order.bloc.dart';
+import 'package:commerce_app/comp/custom_button.comp.dart';
 import 'package:commerce_app/comp/payment_success.comp.dart';
 import 'package:commerce_app/event/basket.event.dart';
 import 'package:commerce_app/event/order.event.dart';
@@ -70,7 +71,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ),
         // PaymentWidget에 AgreementWidget을 연결
         AgreementWidget(paymentWidget: _paymentWidget, selector: 'agreement'),
-        ElevatedButton(
+        CustomButton(
             onPressed: () async {
               final orderId = Uuid().v4();
               //Order db
@@ -125,7 +126,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 );
               }
             },
-            child: const Text('결제하기')),
+            text: '결제하기'),
       ]))
     ])));
   }
