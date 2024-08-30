@@ -10,13 +10,13 @@ import 'package:intl/intl.dart';
 class ProductCard extends StatelessWidget {
   final String name;
   final int price;
-  final String imageUrl;
+  final String image;
   final ProductModel model;
 
   const ProductCard({
     required this.name,
     required this.price,
-    required this.imageUrl,
+    required this.image,
     required this.model,
   });
 
@@ -24,7 +24,7 @@ class ProductCard extends StatelessWidget {
     return ProductCard(
       name: '몬스테라',
       price: 30000,
-      imageUrl: 'asset/img/green_logo.png',
+      image: 'asset/img/green_logo.png',
       model: ProductModel(
         imageUrl: 'imageUrl',
         price: 10000,
@@ -40,7 +40,7 @@ class ProductCard extends StatelessWidget {
     return ProductCard(
       name: model.name,
       price: model.price,
-      imageUrl: model.imageUrl,
+      image: model.imageUrl,
       model: model,
     );
   }
@@ -57,11 +57,11 @@ class ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (imageUrl != null)
+            if (image != null)
               Expanded(
                 child: Center(
                   child: Image.network(
-                    imageUrl!,
+                    image!,
                     fit: BoxFit.cover,
                   ),
                 ),

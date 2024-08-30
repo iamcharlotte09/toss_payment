@@ -7,19 +7,17 @@ import 'package:commerce_app/screen/orders.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void showOrderSuccessDialog(BuildContext context, order) {
+void showOrderSuccessDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return PaymentSuccessDialog(order: order,);
+      return PaymentSuccessDialog();
     },
   );
 }
 
 class PaymentSuccessDialog extends StatelessWidget {
-  final List<BasketModel> order;
-
-  PaymentSuccessDialog({required this.order,Key? key});
+  PaymentSuccessDialog({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +41,7 @@ class PaymentSuccessDialog extends StatelessWidget {
                   (route) => false,
                 );
               },
-              text:  '내 주문 보러가기',
+              text: '내 주문 보러가기',
             ),
             SizedBox(height: 16),
           ],

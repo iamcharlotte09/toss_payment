@@ -2,6 +2,7 @@ import 'package:commerce_app/event/auth.event.dart';
 import 'package:commerce_app/repository/auth.repository.dart';
 import 'package:commerce_app/state/auth.state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as S;
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository repository;
@@ -37,6 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthState(user: user));
     } catch (e) {
       emit(AuthState(user:null));
+      throw Exception(S.AuthException(e.toString()));
     }
   }
 
@@ -46,6 +48,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthState(user: null));
     } catch (e) {
       emit(AuthState(user:null));
+      throw Exception(S.AuthException(e.toString()));
     }
   }
 
@@ -59,6 +62,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthState(user: user));
     } catch (e) {
       emit(AuthState(user:null));
+      throw Exception(S.AuthException(e.toString()));
     }
   }
 }

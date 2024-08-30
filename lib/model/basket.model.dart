@@ -35,14 +35,12 @@ class BasketModel extends ProductModel {
     );
   }
 
-  // Override the equality operator to compare product objects by their IDs
   @override
   bool operator ==(Object other) {
     return other is ProductModel &&
-        other.id == id; // Check if the IDs are the same
+        other.id == id;
   }
 
-  // Override the hashCode to match the == operator logic
   @override
   int get hashCode => id.hashCode;
 }

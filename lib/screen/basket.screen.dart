@@ -20,47 +20,41 @@ class _BasketScreenState extends State<BasketScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BasketBloc, BasketState>(builder: (context, state) {
-      if (state is BasketState && state.basket.isEmpty) {
-        return _EmptyScreen();
-      }
-      if (state is BasketState) {
-        final totalPrice =
-            state.basket.fold(0, (p, item) => p + item!.quantity * item.price);
+      if (state.basket.isNotEmpty) {
 
-        // Convert the nullable list to a non-nullable list
-        final nonNullableBasket = state.basket
-            .where((item) => item != null)
-            .map((item) => item!)
-            .toList();
+        final totalPrice =
+        state.basket.fold(0, (p, item) => p + item!.quantity * item.price);
 
         return DefaultLayout(
-            child: Padding(
-          padding: const EdgeInsets.fromLTRB(18, 0, 18, 40),
-          child: Column(
-            children: [
-              Expanded(
-                child: CustomScrollView(
-                  slivers: [
-                    const _SliverAppBar(),
-                    SliverList.separated(
-                        itemCount: state.basket.length,
-                        itemBuilder: (context, index) {
-                          return BasketItemCard.fromBasketModel(
-                            model: state.basket[index]!,
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(height: 14);
-                        }),
-                  ],
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(18, 0, 18, 40),
+            child: Column(
+              children: [
+                Expanded(
+                  child: CustomScrollView(
+                    slivers: [
+                      const _SliverAppBar(),
+                      SliverList.separated(
+                          itemCount: state.basket.length,
+                          itemBuilder: (context, index) {
+                            return BasketItemCard.fromBasketModel(
+                              model: state.basket[index]!,
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(height: 14);
+                          }),
+                    ],
+                  ),
                 ),
-              ),
-              _Bottom(totalPrice: totalPrice, basket: nonNullableBasket),
-            ],
+                _Bottom(totalPrice: totalPrice),
+              ],
+            ),
           ),
-        ));
+        );
       }
-      return Container();
+
+      return _EmptyScreen();
     });
   }
 }
@@ -91,7 +85,6 @@ class _EmptyScreen extends StatelessWidget {
   }
 }
 
-
 class _SliverAppBar extends StatelessWidget {
   const _SliverAppBar({Key? key}) : super(key: key);
 
@@ -115,11 +108,10 @@ class _SliverAppBar extends StatelessWidget {
 
 class _Bottom extends StatelessWidget {
   final int totalPrice;
-  final List<BasketModel> basket;
 
   const _Bottom({
     required this.totalPrice,
-    required this.basket,
+
     Key? key,
   }) : super(key: key);
 
@@ -147,12 +139,11 @@ class _Bottom extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => PaymentScreen(
-                  basket: basket,
                 ),
               ),
             );
           },
-          text:'결제하기',
+          text: '결제하기',
         ),
       ],
     );

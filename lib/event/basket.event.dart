@@ -21,10 +21,8 @@ class SubtractBasket extends BasketEvent {
 
 class RemoveMultipleBasket extends BasketEvent {
   final List<String> basketIds;
-  final bool isRemoveAll;
 
   RemoveMultipleBasket({
     required this.basketIds,
-    this.isRemoveAll = false,
   });
 }

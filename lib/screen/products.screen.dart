@@ -86,7 +86,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         return SliverToBoxAdapter(
                           child: Center(
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.read<ProductBloc>().add(GetProducts());
+                              },
                               child: Text('다시 가져오기'),
                             ),
                           ),
@@ -98,26 +100,24 @@ class _ProductsScreenState extends State<ProductsScreen> {
                           child: Center(child: CircularProgressIndicator()),
                         );
                       }
+                      final cState = state as LoadedProductState;
 
-                      if (state is LoadedProductState) {
-                        return SliverGrid(
-                          gridDelegate:
-                              const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 200.0,
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 16,
-                            childAspectRatio: 3 / 4,
-                          ),
-                          delegate: SliverChildBuilderDelegate(
-                            (BuildContext context, int index) {
-                              return ProductCard.fromProductModel(
-                                  model: state.products[index]);
-                            },
-                            childCount: 10,
-                          ),
-                        );
-                      }
-                      return Container();
+                      return SliverGrid(
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 200.0,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 3 / 4,
+                        ),
+                        delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                            return ProductCard.fromProductModel(
+                                model: cState.products[index]);
+                          },
+                          childCount: cState.products.length,
+                        ),
+                      );
                     },
                   ),
                   const SliverToBoxAdapter(
